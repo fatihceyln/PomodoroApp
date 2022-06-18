@@ -10,7 +10,7 @@ import SwiftUI
 extension HomeView {
     
     private var pomodorTitle: some View {
-        Text("Pomodoro Timer")
+        Text("Pomodoro 🍅")
             .font(.system(size: 50, weight: .bold, design: .rounded))
             .foregroundColor(.white)
     }

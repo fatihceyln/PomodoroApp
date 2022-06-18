@@ -57,10 +57,10 @@
 			children = (
 				3DD90AB62856596600F500F6 /* PomodorooApp.swift */,
 				3DD90AB82856596600F500F6 /* HomeView.swift */,
-				3DD90ABA2856596700F500F6 /* Assets.xcassets */,
-				3DD90ABC2856596700F500F6 /* Preview Content */,
 				3DD90AC42856597500F500F6 /* ViewModel.swift */,
 				3D1AD3952856608900A96BC3 /* Model.swift */,
+				3DD90ABA2856596700F500F6 /* Assets.xcassets */,
+				3DD90ABC2856596700F500F6 /* Preview Content */,
 			);
 			path = Pomodoroo;
 			sourceTree = "<group>";
