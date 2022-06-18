@@ -174,7 +174,7 @@ extension HomeView {
                         
                         Text("\(String(format: "%0.0f", vm.model.pomodoroLengthInMinutes)) min")
                             .padding(6)
-                            .frame(width: UIScreen.main.bounds.width * 0.2)
+                            .frame(width: UIScreen.main.bounds.width * 0.21)
                             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
                     }
                 }
@@ -194,7 +194,7 @@ extension HomeView {
                         
                         Text("\(String(format: "%0.0f", vm.model.breakLengthInMinutes)) min")
                             .padding(6)
-                            .frame(width: UIScreen.main.bounds.width * 0.2)
+                            .frame(width: UIScreen.main.bounds.width * 0.21)
                             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
                     }
                 }
@@ -214,7 +214,7 @@ extension HomeView {
                         
                         Text("\(String(format: "%0.0f", vm.model.pomodoroCount)) times")
                             .padding(6)
-                            .frame(width: UIScreen.main.bounds.width * 0.2)
+                            .frame(width: UIScreen.main.bounds.width * 0.21)
                             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
                     }
                 }
