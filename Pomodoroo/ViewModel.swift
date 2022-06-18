@@ -12,7 +12,8 @@ enum Status: String {
     case `break` = "Break"
 }
 
-class ViewModel: ObservableObject {
+class ViewModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
+    
     var status: Status = Status.pomodoro
     @Published var model: Model = Model()
     @Published var isTimerRunning: Bool = false
@@ -30,6 +31,33 @@ class ViewModel: ObservableObject {
     @Published var completedPomodoro: Int = 0
     
     @Published var isSmallerDevice: Bool = false
+    
+    override init() {
+        super.init()
+        self.authorizeNotification()
+    }
+    
+    func authorizeNotification() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { _, _ in
+        }
+        
+        UNUserNotificationCenter.current().delegate = self
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound, .banner])
+    }
+    
+    func pushNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Pomodoroo"
+        content.subtitle = "You did it 🥳 Time to rest 😌"
+        content.sound = UNNotificationSound.default
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false))
+        
+        UNUserNotificationCenter.current().add(request)
+    }
     
     func startTimer() {
         withAnimation(.easeInOut) {
@@ -118,6 +146,9 @@ class ViewModel: ObservableObject {
                 }
                 
                 resetTimer()
+                
+                pushNotification()
+                print("push")
             }
         }
     }

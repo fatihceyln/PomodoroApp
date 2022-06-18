@@ -17,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		3D1AD3952856608900A96BC3 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		3D5301BD285DC6C80032E91B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3DD90AB32856596600F500F6 /* Pomodoroo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoroo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD90AB62856596600F500F6 /* PomodorooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodorooApp.swift; sourceTree = "<group>"; };
 		3DD90AB82856596600F500F6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -55,6 +56,7 @@
 		3DD90AB52856596600F500F6 /* Pomodoroo */ = {
 			isa = PBXGroup;
 			children = (
+				3D5301BD285DC6C80032E91B /* Info.plist */,
 				3DD90AB62856596600F500F6 /* PomodorooApp.swift */,
 				3DD90AB82856596600F500F6 /* HomeView.swift */,
 				3DD90AC42856597500F500F6 /* ViewModel.swift */,
@@ -278,6 +280,7 @@
 				DEVELOPMENT_TEAM = 5CYVKDSSNH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Pomodoroo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -307,6 +310,7 @@
 				DEVELOPMENT_TEAM = 5CYVKDSSNH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Pomodoroo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
