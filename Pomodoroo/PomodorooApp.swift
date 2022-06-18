@@ -21,7 +21,7 @@ struct PomodorooApp: App {
                         vm.isSmallerDevice = false
                     }
                     
-                    print(vm.isSmallerDevice)
+                    vm.prepareTimerString()
                 }
         }
     }

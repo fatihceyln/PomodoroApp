@@ -42,6 +42,7 @@ extension HomeView {
                         .rotationEffect(.init(degrees: 90))
                         .offset(x: -50)
                         .font(.headline)
+                        .animation(.none, value: vm.status)
                 }
         }
         .padding(30)
@@ -290,7 +291,7 @@ struct HomeView: View {
         })
         .padding()
         .preferredColorScheme(.dark)
-        .onReceive(Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()) { _ in
+        .onReceive(Timer.publish(every: 0.001, on: .main, in: .common).autoconnect()) { _ in
             if vm.isTimerRunning {
                 vm.updateTimer()
             }

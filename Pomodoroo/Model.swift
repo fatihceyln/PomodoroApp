@@ -9,7 +9,7 @@ import Foundation
 
 struct Model: Codable, Equatable {
     var pomodoroCount: Double = 3
-    var pomodoroLengthInMinutes: Double = 10
+    var pomodoroLengthInMinutes: Double = 20
     var breakLengthInMinutes: Double = 5
     
     var pomodoroLengthInSeconds: Int {

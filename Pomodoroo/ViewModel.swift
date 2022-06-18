@@ -51,12 +51,23 @@ class ViewModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
     func pushNotification() {
         let content = UNMutableNotificationContent()
         content.title = "Pomodoroo"
-        content.subtitle = "You did it 🥳 Time to rest 😌"
+        content.subtitle = "Congratulations 🥳 Time to rest 😌"
         content.sound = UNNotificationSound.default
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false))
         
         UNUserNotificationCenter.current().add(request)
+    }
+    
+    func prepareTimerString() {
+        let hours = Int(model.pomodoroLengthInSeconds / 3600)
+        let minutes = Int(model.pomodoroLengthInSeconds / 60) % 60
+        let seconds = model.pomodoroLengthInSeconds % 60
+
+        timerString = ""
+        timerString += hours == 0 ? "" : "0\(hours):"
+        timerString += minutes >= 10 ? "\(minutes):" : "0\(minutes):"
+        timerString += seconds >= 10 ? "\(seconds)" : "0\(seconds)"
     }
     
     func startTimer() {
@@ -69,14 +80,7 @@ class ViewModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
             pomodorLengthInSeconds = model.pomodoroLengthInSeconds
             breakLengthInSeconds = model.breakLengthInSeconds
             
-            let hours = Int(model.pomodoroLengthInSeconds / 3600)
-            let minutes = Int(model.pomodoroLengthInSeconds / 60) % 60
-            let seconds = model.pomodoroLengthInSeconds % 60
-
-            timerString = ""
-            timerString += hours == 0 ? "" : "0\(hours):"
-            timerString += minutes >= 10 ? "\(minutes):" : "0\(minutes):"
-            timerString += seconds >= 10 ? "\(seconds)" : "0\(seconds)"
+            prepareTimerString()
         }
         isSessionActive = true
     }
@@ -100,14 +104,7 @@ class ViewModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
         pomodorLengthInSeconds = model.pomodoroLengthInSeconds
         breakLengthInSeconds = model.breakLengthInSeconds
         
-        let hours = Int(model.pomodoroLengthInSeconds / 3600)
-        let minutes = Int(model.pomodoroLengthInSeconds / 60) % 60
-        let seconds = model.pomodoroLengthInSeconds % 60
-
-        timerString = ""
-        timerString += hours == 0 ? "" : "0\(hours):"
-        timerString += minutes >= 10 ? "\(minutes):" : "0\(minutes):"
-        timerString += seconds >= 10 ? "\(seconds)" : "0\(seconds)"
+        prepareTimerString()
     }
     
     func pomodoroRunning() {
@@ -148,7 +145,6 @@ class ViewModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
                 resetTimer()
                 
                 pushNotification()
-                print("push")
             }
         }
     }
