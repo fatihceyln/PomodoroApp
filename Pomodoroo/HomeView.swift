@@ -11,13 +11,12 @@ extension HomeView {
     
     private var pomodorTitle: some View {
         Text("Pomodoro 🍅")
-            .font(.system(size: 50, weight: .bold, design: .rounded))
+            .font(.system(size: vm.isSmallerDevice ? 45 : 50, weight: .bold, design: .rounded))
             .foregroundColor(.white)
     }
     
     private func pomodoroRingView(proxy: GeometryProxy) -> some View {
         ZStack {
-            
             // Outer area
             Circle()
                 .trim(from: 0, to: vm.progress)
@@ -48,7 +47,6 @@ extension HomeView {
         .padding(30)
         .rotationEffect(.degrees(-90))
         .frame(height: proxy.size.width)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
     
     private var knobView: some View {
@@ -71,7 +69,7 @@ extension HomeView {
     
     private var timerText: some View {
         Text(vm.timerString)
-            .font(.system(size: 45, weight: .bold, design: .rounded))
+            .font(.system(size: vm.isSmallerDevice ? 40.5 : 45, weight: .bold, design: .rounded))
             .rotationEffect(.degrees(90))
             .animation(.none, value: vm.progress)
     }
@@ -86,7 +84,7 @@ extension HomeView {
             Image(systemName: "timer")
                 .font(.largeTitle)
                 .foregroundColor(.white)
-                .frame(width: 60, height: 60)
+                .frame(width: UIScreen.main.bounds.width * 0.15, height: UIScreen.main.bounds.width * 0.15)
                 .background {
                     Circle()
                         .fill(.pink)
@@ -122,13 +120,11 @@ extension HomeView {
                 } label: {
                     Text("Reset")
                 }
-                .offset(x: !vm.isTimerRunning ? 100 : 0)
+                .offset(x: !vm.isTimerRunning ? UIScreen.main.bounds.width * 0.25 : 0)
                 .opacity(!vm.isTimerRunning ? 1.0 : 0)
                 .tint(.white)
             }
         }
-        .padding(.bottom, 20)
-        .padding(.top, -20)
     }
     
     private var pomodoroInfo: some View {
@@ -137,20 +133,17 @@ extension HomeView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .font(.body.bold())
             .padding(.horizontal)
-            .padding(.top, 30)
-            .padding(.bottom, -30)
     }
     
     private var pomodoroIndicator: some View {
         HStack {
             ForEach(0..<Int(vm.model.pomodoroCount), id: \.self) { index in
                 Circle()
-                    .frame(width: 10, height: 10)
+                    .frame(width: UIScreen.main.bounds.width * 0.025, height: UIScreen.main.bounds.width * 0.025)
                     .foregroundColor(index < vm.completedPomodoro ? .pink : .secondary)
                     .shadow(color: index < vm.completedPomodoro ? .pink : .clear, radius: 4)
             }
         }
-        .offset(y: -70)
     }
     
     private func newPomodoroView() -> some View {
@@ -263,7 +256,11 @@ struct HomeView: View {
     var body: some View {
         VStack {
             pomodorTitle
-            pomodoroInfo
+                .frame(maxWidth: .infinity)
+                .overlay {
+                    pomodoroInfo
+                        .padding(.top, UIScreen.main.bounds.height * 0.15)
+                }
             
             GeometryReader { proxy in
                 VStack(spacing: 16) {
@@ -271,13 +268,25 @@ struct HomeView: View {
                     
                     pomodoroIndicator
                     
+                    Spacer()
+                    
                     controlButtons(proxy: proxy)
                     
                     timerButton
+                    
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(maxWidth: .infinity)
             }
         }
+        // DELETE THIS LATER ON
+        .onAppear(perform: {
+            if UIScreen.main.bounds.width <= 380 {
+                vm.isSmallerDevice = true
+            }
+            else {
+                vm.isSmallerDevice = false
+            }
+        })
         .padding()
         .preferredColorScheme(.dark)
         .onReceive(Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()) { _ in
@@ -305,7 +314,14 @@ struct HomeView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
-            .environmentObject(ViewModel())
+        Group {
+            HomeView()
+                .environmentObject(ViewModel())
+                .previewDevice("iPhone 13 Pro Max")
+            
+            HomeView()
+                .environmentObject(ViewModel())
+                .previewDevice("iPhone SE (3rd generation)")
+        }
     }
 }

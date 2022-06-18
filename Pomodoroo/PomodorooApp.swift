@@ -14,6 +14,15 @@ struct PomodorooApp: App {
         WindowGroup {
             HomeView()
                 .environmentObject(vm)
+                .onAppear {
+                    if UIScreen.main.bounds.width <= 380 {
+                        vm.isSmallerDevice = true
+                    } else {
+                        vm.isSmallerDevice = false
+                    }
+                    
+                    print(vm.isSmallerDevice)
+                }
         }
     }
 }

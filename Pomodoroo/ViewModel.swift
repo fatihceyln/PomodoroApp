@@ -29,6 +29,8 @@ class ViewModel: ObservableObject {
     
     @Published var completedPomodoro: Int = 0
     
+    @Published var isSmallerDevice: Bool = false
+    
     func startTimer() {
         withAnimation(.easeInOut) {
             isTimerRunning = true
