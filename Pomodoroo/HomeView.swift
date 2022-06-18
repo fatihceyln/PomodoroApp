@@ -65,6 +65,7 @@ extension HomeView {
                 .frame(width: size.width, height: size.height, alignment: .center)
                 .offset(x: size.height / 2)
                 .rotationEffect(.degrees(vm.progress * 360))
+                .shadow(color: .pink.opacity(0.8), radius: 10)
         }
     }
     
