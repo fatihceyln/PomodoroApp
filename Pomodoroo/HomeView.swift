@@ -234,6 +234,7 @@ extension HomeView {
                     .background {
                         Capsule()
                             .fill(.pink)
+                            .frame(width: UIScreen.main.bounds.width * 0.23, height: UIScreen.main.bounds.height * (vm.isSmallerDevice ? 0.07 : 0.05))
                     }
             }
             .padding(.bottom)
